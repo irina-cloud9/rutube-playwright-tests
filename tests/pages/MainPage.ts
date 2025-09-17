@@ -9,12 +9,17 @@ export class MainPage extends BasePage {
   constructor(page: Page) {
     super(page);
     this.headerLocator = this.page.getByRole('banner');
-    this.categoriesTabsLocator = this.page
-      .locator('section')
-      .filter({
-        hasText: 'ГлавнаяРекомендацииФильмыСериалыТелешоуСпортБлогерыНовостиМузыкаПодкастыДетямТВ ',
-      })
-      .first();
+
+    this.categoriesTabsLocator = this.page.locator(
+      '#root > div > div:nth-child(3) > div > main > div.application-module__content > section > section.wdp-tabs-module__tabs',
+    );
+
+    // this.categoriesTabsLocator = this.page
+    //   .locator('section')
+    //   .filter({
+    //     hasText: 'ГлавнаяРекомендацииФильмыСериалыТелешоуСпортБлогерыНовостиМузыкаПодкастыДетямТВ ',
+    //   })
+    //   .first();
     this.menuLocator = this.page.getByLabel('Облегченная панель навигации');
   }
 

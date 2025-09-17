@@ -1,27 +1,14 @@
-import test from '@playwright/test';
+import { test, expect } from '../../fixtures/fixteres';
 import { MainPage } from '../../pages/MainPage';
 
-test('Проверка доступности элементов headera', async ({ page }) => {
-  const mainPage = new MainPage(page);
-  await mainPage.open();
-  await mainPage.closeCookiesAlert();
-  await mainPage.closeAdBlock();
+test('Проверка доступности элементов headera', async ({ mainPage }) => {
   await mainPage.headerHasCorrectAreaSnapshot();
 });
 
-//тест падает, нет номаольного локаторы - можно переделать
-test('Проверка доступности элементов tabov категории', async ({ page }) => {
-  const mainPage = new MainPage(page);
-  await mainPage.open();
-  await mainPage.closeCookiesAlert();
-  await mainPage.closeAdBlock();
+//тест падает, нет номаольного локатора - можно переделать
+test('Проверка доступности элементов tabov категории', async ({ mainPage, page }) => {
   await mainPage.categoriesTabsHasCorrectAreaSnapshot();
-  await page.waitForTimeout(10000);
 });
-test('Проверка доступности элементов бокового меню', async ({ page }) => {
-  const mainPage = new MainPage(page);
-  await mainPage.open();
-  await mainPage.closeCookiesAlert();
-  await mainPage.closeAdBlock();
+test('Проверка доступности элементов бокового меню', async ({ mainPage }) => {
   await mainPage.menuHasCorrectAreaSnapshot();
 });
