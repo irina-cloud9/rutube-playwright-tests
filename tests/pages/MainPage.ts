@@ -24,6 +24,10 @@ export class MainPage extends BasePage {
   readonly headerLoginButtonNextLocator: Locator;
   readonly headerRegistrationWindow: Locator;
 
+  //Навигация - бергер меню
+  readonly openNavigationMenu: Locator;
+  readonly elementsNavigationMenu: Locator;
+
   constructor(page: Page) {
     super(page);
     this.headerLocator = this.page.getByRole('banner');
@@ -70,7 +74,12 @@ export class MainPage extends BasePage {
       .locator('iframe[title="Multipass"]')
       .contentFrame()
       .locator('div[role="form"]');
+
+    //Меню навигации
+    this.openNavigationMenu = this.page.getByRole('button', { name: 'Открыть меню навигации' });
+    this.elementsNavigationMenu = this.page.locator('.menu-content-module__menuOpen');
   }
+
   async open() {
     await this.page.goto('https://rutube.ru/');
   }
@@ -100,10 +109,22 @@ export class MainPage extends BasePage {
   async clickModeLightButton() {
     await this.headerModeLightButtonLocator.click();
   }
+
+  //Проверяем, что в атрибутах есть светлая тема - переключился
+  async lightTheme() {
+    await expect(this.page.locator('html')).toHaveAttribute('data-themeid', 'light');
+  }
+
   //Нажать на кнопку "Переход на темную тему"
   async clickModeDarkButton() {
     await this.headerModeDarkButtonLocator.click();
   }
+
+  //Проверяем, что в атрибутах есть темная тема - переключился
+  async darkTheme() {
+    await expect(this.page.locator('html')).toHaveAttribute('data-themeid', 'dark');
+  }
+
   //Нажать на кнопку "Безопасный режим"
   async clickSaveModeButton() {
     await this.headerSafeModeButtonLocator.hover();
@@ -127,7 +148,7 @@ export class MainPage extends BasePage {
     await this.headerLoginButtonNextLocator.click();
   }
 
-  //Проверка доступности элементов
+  //Проверка доступности элементов header
   async addPopupButtonSnapshot() {
     await expect(this.headerAddButtonPopupLocator).toMatchAriaSnapshot({ name: 'addPopup.yml' });
   }
@@ -150,5 +171,15 @@ export class MainPage extends BasePage {
     await expect(this.headerRegistrationWindow).toMatchAriaSnapshot({
       name: 'registrationWindow.yml',
     });
+  }
+
+  //Проверка доступности элементов меню навигации
+  async navigationMenu() {
+    await expect(this.elementsNavigationMenu).toMatchAriaSnapshot({ name: 'navigationMenu.yml' });
+  }
+
+  //Нажать на меню навигации
+  async clickNavigationMenu() {
+    await this.openNavigationMenu.click();
   }
 }

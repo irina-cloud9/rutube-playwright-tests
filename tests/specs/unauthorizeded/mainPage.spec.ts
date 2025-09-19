@@ -36,3 +36,19 @@ test('Проверка доступности элементов модальн�
   await mainPage.clickButtonNext();
   await mainPage.registrationWindowSnapshot();
 });
+//в yml документ элементы сохранисиль, но значения не стабильные и каждый раз выбрасывает 1-2 ошибки
+test('Проверка доступности элементов меню навигации - раскрыт', async ({ mainPage }) => {
+  await mainPage.clickNavigationMenu();
+  await mainPage.navigationMenu();
+});
+
+test('Переключение  темная=>светлая тема', async ({ mainPage }) => {
+  await mainPage.clickModeLightButton();
+  await mainPage.lightTheme();
+});
+test('Переключение  темная=>светлая=>темная тема', async ({ mainPage }) => {
+  await mainPage.clickModeLightButton();
+  await mainPage.lightTheme();
+  await mainPage.clickModeDarkButton();
+  await mainPage.darkTheme();
+});
