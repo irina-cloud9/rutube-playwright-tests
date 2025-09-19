@@ -7,10 +7,20 @@ export class BasePage {
     this.page = page;
   }
   async closeCookiesAlert() {
-    await this.page.getByRole('button', { name: 'Ок', exact: true }).click();
+    // await this.page.getByRole('button', { name: 'Ок', exact: true }).click();
+    const closeCookiesAlert = this.page.getByRole('button', { name: 'Закрыть' });
+
+    if (await closeCookiesAlert.isVisible()) {
+      await closeCookiesAlert.click();
+    }
   }
 
   async closeAdBlock() {
-    await this.page.getByRole('button', { name: 'Закрыть' }).click();
+    // await this.page.getByRole('button', { name: 'Закрыть' }).click();
+    const closeButton = this.page.getByRole('button', { name: 'Закрыть' });
+
+    if (await closeButton.isVisible()) {
+      await closeButton.click();
+    }
   }
 }
