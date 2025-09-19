@@ -1,0 +1,24 @@
+- img "Иконка канала channel69814103"
+- paragraph:
+  - link "channel69814103":
+    - /url: /channel/69814103/
+  - link:
+    - /url: /profile/info/edit/
+    - img
+- paragraph: /\+7 \*\*\* \*\*\*-\d+-\d+/
+- paragraph:
+  - link "Завершите":
+    - /url: /profile/
+  - text: регистрацию
+- list:
+  - listitem:
+    - link "Профиль":
+      - /url: /profile/
+  - listitem:
+    - link "Мой канал":
+      - /url: /channel/69814103/
+  - listitem:
+    - link "Студия RUTUBE":
+      - /url: https://studio.rutube.ru/
+- button "Выйти":
+  - img

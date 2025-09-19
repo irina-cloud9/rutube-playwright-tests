@@ -28,6 +28,10 @@ export class MainPage extends BasePage {
   readonly openNavigationMenu: Locator;
   readonly elementsNavigationMenu: Locator;
 
+  //Иконка пользователя
+  readonly iconUser: Locator;
+  readonly informashionModalUser: Locator;
+
   constructor(page: Page) {
     super(page);
     this.headerLocator = this.page.getByRole('banner');
@@ -78,22 +82,17 @@ export class MainPage extends BasePage {
     //Меню навигации
     this.openNavigationMenu = this.page.getByRole('button', { name: 'Открыть меню навигации' });
     this.elementsNavigationMenu = this.page.locator('.menu-content-module__menuOpen');
+
+    //иконка пользователя
+    this.iconUser = this.page.getByRole('img', { name: 'Иконка канала channel69814103' });
+    this.informashionModalUser = this.page.getByText(
+      'channel69814103+7 *** ***-87-53Завершите регистрациюПрофильМой каналСтудия',
+    );
+    // this.informashionModalUser = this.page.locator('section').filter({ hasText: 'Завершите' });
   }
 
   async open() {
     await this.page.goto('https://rutube.ru/');
-  }
-  //Проверка доступности элементов (локаторы) через кастомный метод
-  async headerHasCorrectAreaSnapshot() {
-    await expect(this.headerLocator).toMatchAriaSnapshot({ name: 'headerSnapshot.yml' });
-  }
-  async categoriesTabsHasCorrectAreaSnapshot() {
-    await expect(this.categoriesTabsLocator).toMatchAriaSnapshot({
-      name: 'categoriesTabsSnapshot.yml',
-    });
-  }
-  async menuHasCorrectAreaSnapshot() {
-    await expect(this.menuLocator).toMatchAriaSnapshot({ name: 'menuSnapshot.yml' });
   }
 
   //Header
@@ -148,38 +147,55 @@ export class MainPage extends BasePage {
     await this.headerLoginButtonNextLocator.click();
   }
 
+  //Нажать на меню навигации
+  async clickNavigationMenu() {
+    await this.openNavigationMenu.click();
+  }
+
+  //Нажать на иконку юзера
+  async cliclIconUser() {
+    await this.iconUser.click();
+  }
+
+  //Проверка доступности элементов (локаторы) через кастомный метод
+  async headerHasCorrectAreaSnapshot() {
+    await this.checkAriaSnapshot(this.headerLocator, 'headerSnapshot.yml');
+    // await expect(this.headerLocator).toMatchAriaSnapshot({ name: 'headerSnapshot.yml' });
+  }
+  async categoriesTabsHasCorrectAreaSnapshot() {
+    await this.checkAriaSnapshot(this.categoriesTabsLocator, 'categoriesTabsSnapshot.yml');
+  }
+  async menuHasCorrectAreaSnapshot() {
+    await this.checkAriaSnapshot(this.menuLocator, 'menuSnapshot.yml');
+  }
+
   //Проверка доступности элементов header
   async addPopupButtonSnapshot() {
-    await expect(this.headerAddButtonPopupLocator).toMatchAriaSnapshot({ name: 'addPopup.yml' });
+    await this.checkAriaSnapshot(this.headerAddButtonPopupLocator, 'addPopup.yml');
   }
   async notificationPopupButtonSnapshot() {
-    await expect(this.headerNotificationButtonPopupLocator).toMatchAriaSnapshot({
-      name: 'notificationPopup.yml',
-    });
+    await this.checkAriaSnapshot(
+      this.headerNotificationButtonPopupLocator,
+      'notificationPopup.yml',
+    );
   }
   async saveModePopupButtonSnapshot() {
-    await expect(this.headerSaveModeButtonPopupLocator).toMatchAriaSnapshot({
-      name: 'saveModePopupButton.yml',
-    });
+    await this.checkAriaSnapshot(this.headerSaveModeButtonPopupLocator, 'saveModePopupButton.yml');
   }
   async authorizedModelWindowSnapshot() {
-    await expect(this.headerLoginModelWindowLocator).toMatchAriaSnapshot({
-      name: 'authorizedModelWindow.yml',
-    });
+    await this.checkAriaSnapshot(this.headerLoginModelWindowLocator, 'authorizedModelWindow.yml');
   }
   async registrationWindowSnapshot() {
-    await expect(this.headerRegistrationWindow).toMatchAriaSnapshot({
-      name: 'registrationWindow.yml',
-    });
+    await this.checkAriaSnapshot(this.headerRegistrationWindow, 'registrationWindow.yml');
   }
 
   //Проверка доступности элементов меню навигации
   async navigationMenu() {
-    await expect(this.elementsNavigationMenu).toMatchAriaSnapshot({ name: 'navigationMenu.yml' });
+    await this.checkAriaSnapshot(this.elementsNavigationMenu, 'navigationMenu.yml');
   }
 
-  //Нажать на меню навигации
-  async clickNavigationMenu() {
-    await this.openNavigationMenu.click();
+  //Проверка доступности элементов в модальном окне юзера
+  async modalUser() {
+    await this.checkAriaSnapshot(this.informashionModalUser, 'modalUser.yml');
   }
 }

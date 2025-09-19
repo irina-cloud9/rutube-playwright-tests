@@ -10,7 +10,7 @@ chromium.use(stealth()); //Для капчи
 
 const authFile = path.join(__dirname, '../playwright/.auth/user.json');
 
-test('test', async () => {
+test('Авторизация', async () => {
   //Настройка по убиранию капчи
   const brauser = await chromium.launch();
   const context = await brauser.newContext();
