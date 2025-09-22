@@ -8,7 +8,7 @@ export class SabscripshionsPage extends BasePage {
     this.contetntPageLocator = this.page.locator('.application-module__content');
   }
   async open() {
-    await this.page.goto('https://rutube.ru/my/subscriptions/');
+    await this.page.goto('/my/subscriptions/');
   }
   async contentCorrectSnapshot() {
     await this.checkAriaSnapshot(this.contetntPageLocator, 'contentAriaSnapshot.yml');
