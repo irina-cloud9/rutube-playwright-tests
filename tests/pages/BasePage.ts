@@ -27,4 +27,15 @@ export class BasePage {
   protected async checkAriaSnapshot(Locator: Locator, ariaName: string) {
     await expect(Locator).toMatchAriaSnapshot({ name: ariaName });
   }
+  protected async checklayoutByScreenshot(Locator: Locator, screenshotName: string) {
+    await expect(Locator).toHaveScreenshot(screenshotName);
+  }
+  protected async hideElement(selector: string) {
+    await this.page.evaluate((selector) => {
+      const header = document.querySelector(selector);
+      if (header) {
+        (header as HTMLElement).style.display = 'none';
+      }
+    }, selector);
+  }
 }
