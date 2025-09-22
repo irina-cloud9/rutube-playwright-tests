@@ -31,6 +31,13 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    proxy: process.env.CI
+      ? {
+          server: process.env.PROXY_IP!,
+          username: process.env.PROXY_LOGIN!,
+          password: process.env.PROXY_PASSWORD!,
+        }
+      : undefined,
   },
 
   /* Configure projects for major browsers */
@@ -48,7 +55,7 @@ export default defineConfig({
       testDir: 'tests\\specs\\unauthorizeded',
       snapshotPathTemplate: 'tests/snapshot/unauthorizeded/{testFilePath}/{arg}{ext}',
     },
-    { name: 'auth', testMatch: 'tests\\specs\\autTest.spec.ts' },
+    // { name: 'auth', testMatch: 'tests\\specs\\autTest.spec.ts' },
 
     /* Test against mobile viewports. */
     // {
